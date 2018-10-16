@@ -1,5 +1,6 @@
 package com.minlo.kuweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.minlo.kuweather.gson.Forecast;
 import com.minlo.kuweather.gson.Weather;
+import com.minlo.kuweather.service.AutoUpdateService;
 import com.minlo.kuweather.util.HttpUtil;
 import com.minlo.kuweather.util.Utility;
 
@@ -33,7 +35,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class WeatherActivity extends AppCompatActivity {
-    private static final String key="bc35493ee1cc45358e06c0f500e29861";
+    public static final String key="bc35493ee1cc45358e06c0f500e29861";
     private ScrollView weatherLayout;
     private TextView titleCity,titleUpdateTime,degreeText
             ,weatherInfoText;
@@ -234,6 +236,9 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+
+        Intent intent=new Intent(this,AutoUpdateService.class);
+        startService(intent);
     }
 
 
